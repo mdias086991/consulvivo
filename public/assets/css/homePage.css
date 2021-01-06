@@ -1,0 +1,23 @@
+html, body {
+    overflow: hidden;
+}
+.text-home {
+    z-index: 1;
+    margin-top: -19%;
+}
+.text-home h1 {
+    font-weight: bold;
+    font-size: 52px;
+    color: #5661F8
+}
+.text-home p {
+    font-size: 30px;
+    line-height: 46px;
+    color: #5661F8
+}
+.text-home .btn-route {
+    background: #5661F8;
+    border-radius: 3px;
+    padding: 10px;
+    color: white;
+}

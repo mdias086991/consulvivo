@@ -1,0 +1,25 @@
+html, body {
+    overflow: hidden;
+}
+.svg-base-right, .svg-base-left {
+    display: none
+}
+.select-doctor-type,
+.select-patient-type {
+    filter: grayscale(100%);
+    transform: scale(1.0);
+     transition: .5s;
+     height: 100vh;
+}
+.select-doctor-type h3,
+.select-patient-type h3 {
+    color: #5661F8;
+    font-weight: bold;
+}
+
+.select-patient-type:hover,
+.select-doctor-type:hover {
+    filter: grayscale(0);
+    transform: scale(1.1);
+    transition: .5s;
+}

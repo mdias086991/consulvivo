@@ -1,0 +1,19 @@
+body,html {
+    font-family: 'Lora', serif !important;
+}
+a {
+    text-decoration: none !important;
+}
+
+/* Rectangle 7 */
+.svg-base-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.svg-base-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

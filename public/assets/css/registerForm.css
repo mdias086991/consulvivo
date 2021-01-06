@@ -1,0 +1,29 @@
+html, body {
+    overflow: hidden;
+}
+.svg-base-right,
+.svg-base-left {
+    display: none
+}
+
+.form-register-patient {
+    background: #FFCA4F;
+    height: 100vh;
+    padding: 5%;
+    width: 50%;
+}
+
+.image-register h3{
+    font-weight: 400;
+    font-size: 52px;
+    line-height: 67px;
+}
+.image-register p {
+    font-size: 25px;
+    line-height: 46px;
+    text-align: center;
+}
+
+.form-register-patient h4, label {
+    color: #5661F8;
+}
