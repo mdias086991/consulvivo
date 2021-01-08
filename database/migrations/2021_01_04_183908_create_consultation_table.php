@@ -18,6 +18,7 @@ class CreateConsultationTable extends Migration
             $table->timestamps();
             $table->string('date_end');
             $table->string('status');
+            $table->string('city');
             $table->unsignedBigInteger('patient_id')->unsigned();
             $table->unsignedBigInteger('doctor_id')->unsigned();
 

@@ -4,9 +4,14 @@
 @endsection
 
 @section('content-dash')
+
 <div class="container mt-5" style="background: rgba(86, 97, 248, 0.69); padding: 5%;border-radius: 3px;">
 
-    <form class="row g-3">
+    <form class="row g-3" action="{{route('store-consultation')}}" method="POST">
+      @csrf
+      <div class="col-md-6" style="visibility: hidden">
+        <input type="text" class="form-control" id="patient_id" name="patient_id" value="{{Auth::user()->id}}">
+      </div>
         <div class="col-md-12">
           <label for="inputEmail4" class="form-label">Cidade</label>
           <select name="city" id="city" class="form-control">
@@ -18,16 +23,14 @@
         <div class="col-12">
           <label for="inputAddress" class="form-label">Médico</label>
           <select name="doctor" id="doctor" class="form-control">
-              <option value="Matheus">Matheus</option>
+              @foreach ($doctor as $doc)
+                <option value="{{$doc->id}}">{{$doc->name}}</option>
+              @endforeach
           </select>
         </div>
         <div class="col-md-6">
           <label for="inputCity" class="form-label">Data da consulta</label>
-          <input type="date" class="form-control" id="date_init" name="date_init">
-        </div>
-        <div class="col-md-4">
-          <label for="inputState" class="form-label">Horario</label>
-          <input type="time" class="form-control" id="inputCity">
+          <input type="date" class="form-control" id="date" name="date">
         </div>
         <div class="col-12">
           <button type="submit" class="btn btn-primary">Marcar consulta</button>

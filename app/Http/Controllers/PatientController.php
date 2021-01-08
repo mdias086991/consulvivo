@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Consutation;
+use App\Entities\Doctor;
 use App\Entities\Patient;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ConfirmRegister;
+use Illuminate\Support\Facades\Auth;
 
 class PatientController extends Controller
 {
@@ -26,9 +29,34 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createConsultation()
     {
-        //
+        $doctor = Doctor::get();
+        return view('patient.new-consultation', compact('doctor'));
+    }
+
+    public function storeConsultation(Request $request) {
+        $consultation = new Consutation();
+
+        $consultation->city = $request->city;
+        $consultation->patient_id = $request->patient_id;
+        $consultation->doctor_id = $request->doctor;
+        $consultation->date_end = $request->date;
+
+        $date_consultation = strtotime($request->date);
+        $date_create = strtotime('today');
+
+
+        if($date_consultation > $date_create) {
+            $consultation->status = 'Atrasado';
+        } else {
+            $consultation->status = 'Agendado';
+        }
+
+        $consultation->save();
+
+        return redirect()->back();
+
     }
 
     /**

@@ -5,10 +5,13 @@
 
 @section('content-dash')
     @if (Auth::user()->type == 'patient')
-        <div class="container">
-            @include('patient.myconsultations')
+        <div class="container  mt-5">
+           <h2>Bem vindo {{Auth::user()->name}}, aqui você poderá marcar, editar, e até cancelar suas consultas</h2>
+           <h5>Comece agora marcando uma consulta clicando <a href="{{route('new-consultation')}}">aqui</a></h5>
         </div>
     @else 
-        @include('doctor.myconsultations')
+        <div class="container mt-5">
+            @include('doctor.myconsultations')
+        </div>
     @endif
 @endsection

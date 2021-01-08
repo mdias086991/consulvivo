@@ -26,5 +26,7 @@ Route::post('/storeDoctor', 'DoctorController@store')->name('store-doctor');
 
 Auth::routes();
 
+Route::get('/new-consultation', 'PatientController@createConsultation')->name('new-consultation');
+Route::post('/new-consultation', 'PatientController@storeConsultation')->name('store-consultation');
 
 Route::get('/home', 'HomeController@index')->name('home');

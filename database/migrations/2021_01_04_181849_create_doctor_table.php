@@ -17,7 +17,6 @@ class CreateDoctorTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('birth');
-            $table->string('city-meets');
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->timestamps();
 
