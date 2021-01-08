@@ -13,10 +13,11 @@ class CreateDoctorTable extends Migration
      */
     public function up()
     {
-        Schema::create('doctor', function (Blueprint $table) {
+        Schema::create('doctors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('birth');
+            $table->string('city-meets');
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->timestamps();
 
@@ -31,6 +32,6 @@ class CreateDoctorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doctor');
+        Schema::dropIfExists('doctors');
     }
 }

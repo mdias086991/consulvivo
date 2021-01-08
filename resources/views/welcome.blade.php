@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.base')
 
 @section('scoped_styles')
     <link rel="stylesheet" href="{{asset('assets/css/homePage.css')}}">
@@ -21,7 +21,8 @@
             <div class="col-md-5 col-sm-12 text-home">
                 <h1>Marque consultas</h1>
                 <p>Marque consultas com os médicos da sua região</p>
-                <a class="bnt btn-route" href="{{url('selectType')}}">Começar</a>
+                <a class="bnt btn-route" href="{{url('login')}}">Acessar</a>
+                <a class="bnt btn-route" href="{{url('selectType')}}">Começar agora</a>
             </div>
         </div>
        

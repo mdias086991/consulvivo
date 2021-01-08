@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Entities\Patient;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmRegister;
 
 class PatientController extends Controller
 {
@@ -37,6 +39,8 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
+        $doctor = NULL;
+
         $user = new User();
         
         $user->email = $request->email;
@@ -54,6 +58,9 @@ class PatientController extends Controller
 
             $patient->save();
         }
+        Mail::to($request->email)->send(new ConfirmRegister($request->email, $request->name, $patient->id)); 
+        
+        return view('confirm', compact('patient', 'doctor'));
     }
 
     /**

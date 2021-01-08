@@ -21,8 +21,10 @@ Route::get('/selectType', function () { return view('selectType'); });
 Route::get('/newDoctor', 'DoctorController@index')->name('form-doctor');
 Route::get('/newPatient', 'PatientController@index')->name('form-patient');
 Route::post('/storePatient', 'PatientController@store')->name('store-patient');
+Route::post('/storeDoctor', 'DoctorController@store')->name('store-doctor');
 // End register user routes
 
 Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');

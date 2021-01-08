@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.base')
 
 @section('scoped_styles')
     <link rel="stylesheet" href="{{asset('assets/css/selectTypePage.css')}}">
