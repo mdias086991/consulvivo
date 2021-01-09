@@ -31,7 +31,7 @@ class ConfirmRegister extends Mailable
      */
     public function build()
     {
-        return $this->from('matheus2006_dias@hotmail.com')
+        return $this->from(env('MAIL_USERNAME'))
             ->subject('Criação de uma nova conta')
             ->markdown('emails.newUser')
             ->with([

@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Env;
 
 class AlterInformation extends Mailable
 {
@@ -31,7 +32,7 @@ class AlterInformation extends Mailable
      */
     public function build()
     {
-        return $this->from('matheus2006_dias@hotmail.com')
+        return $this->from(env('MAIL_USERNAME'))
         ->subject('Nova consulta para você')
         ->markdown('emails.alter')
         ->with([

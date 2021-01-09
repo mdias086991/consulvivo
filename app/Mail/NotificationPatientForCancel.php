@@ -30,7 +30,7 @@ class NotificationPatientForCancel extends Mailable
      */
     public function build()
     {
-        return $this->from('matheus2006_dias@hotmail.com')
+        return $this->from(env('MAIL_USERNAME'))
             ->subject('Consulta cancelada pelo médico')
             ->markdown('emails.cancel')
             ->with([

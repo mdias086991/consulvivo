@@ -31,7 +31,7 @@ class DoctorNotification extends Mailable
      */
     public function build()
     {
-        return $this->from('matheus2006_dias@hotmail.com')
+        return $this->from(env('MAIL_USERNAME'))
             ->subject('Nova consulta para você')
             ->markdown('emails.doctorNotification')
             ->with([
