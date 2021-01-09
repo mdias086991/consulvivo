@@ -16,7 +16,7 @@
                         <a class="nav-link" aria-current="page" href="{{route('new-consultation')}}">Marcar Consultas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Minhas Consultas</a>
+                        <a class="nav-link" href="{{route('view-consultation')}}">Minhas Consultas</a>
                     </li>
                 @else 
                     <li class="nav-item">
@@ -47,7 +47,8 @@
         </div>
     </nav>
 </header>
-
-@yield('content-dash')
+<div class="main container">
+    @yield('content-dash')
+</div>
 
 @endsection

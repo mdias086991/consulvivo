@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Entities\Consutation;
 use App\Entities\Doctor;
 use App\Entities\Patient;
+use App\Mail\AlterInformation;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ConfirmRegister;
+use App\Mail\DoctorNotification;
+use App\Mail\PatientNotification;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Comment\Doc;
+use Symfony\Component\Mime\Part\Multipart\AlternativePart;
 
 class PatientController extends Controller
 {
@@ -36,10 +41,14 @@ class PatientController extends Controller
     }
 
     public function storeConsultation(Request $request) {
+        $patient_id = Patient::where('user_id', $request->patient_id)->first();
+        $doctor = Doctor::where('id', $request->doctor)->first();
+
+
         $consultation = new Consutation();
 
         $consultation->city = $request->city;
-        $consultation->patient_id = $request->patient_id;
+        $consultation->patient_id = $patient_id->id;
         $consultation->doctor_id = $request->doctor;
         $consultation->date_end = $request->date;
 
@@ -47,16 +56,34 @@ class PatientController extends Controller
         $date_create = strtotime('today');
 
 
-        if($date_consultation > $date_create) {
+        if($date_consultation < $date_create) {
             $consultation->status = 'Atrasado';
         } else {
             $consultation->status = 'Agendado';
         }
 
         $consultation->save();
+        Mail::to($doctor->user->email)->send(new DoctorNotification($doctor->name, $request->date, $patient_id->name)); 
+        Mail::to($patient_id->user->email)->send(new PatientNotification($patient_id->name, $doctor->name)); 
 
         return redirect()->back();
 
+    }
+
+    public function viewConsultation() {
+        $patient_id = Patient::where('user_id', Auth::user()->id)->first();
+        $doctor = Doctor::get();
+        $consultation = Consutation::where('patient_id', $patient_id->id)->get();
+        return view('patient.myconsultations', compact('consultation', 'doctor'));
+    }
+
+    public function cancel($id) {
+        $consultation = Consutation::where('id', $id)->first();
+
+        $consultation->status = 'Cancelado pelo paciente';
+        $consultation->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -86,10 +113,13 @@ class PatientController extends Controller
 
             $patient->save();
         }
+
         Mail::to($request->email)->send(new ConfirmRegister($request->email, $request->name, $patient->id)); 
         
         return view('confirm', compact('patient', 'doctor'));
     }
+
+   
 
     /**
      * Display the specified resource.
@@ -108,9 +138,21 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $consultation = Consutation::where('id', $id)->first();
+
+        Mail::to($consultation->doctor->user->email)->send(new AlterInformation($consultation->doctor->name, $consultation->date_end, $request->new_date, $consultation->patient->name)); 
+        
+        $consultation->date_end = $request->new_date;
+        $consultation->status = "Agendado";
+
+        $consultation->save();
+
+        return redirect()->back();
+
+
+        
     }
 
     /**

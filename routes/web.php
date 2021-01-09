@@ -26,7 +26,14 @@ Route::post('/storeDoctor', 'DoctorController@store')->name('store-doctor');
 
 Auth::routes();
 
+Route::get('doctor-consultations', 'DoctorController@doctorConsultation')->name('doctor-consultation');
+Route::post('/approve-consultation/{id}', 'DoctorController@approveConsultation')->name('approve-consultation');
+Route::post('/cancel-consultation/{id}', 'DoctorController@reproveConsultation')->name('cancel-consultation');
+
 Route::get('/new-consultation', 'PatientController@createConsultation')->name('new-consultation');
 Route::post('/new-consultation', 'PatientController@storeConsultation')->name('store-consultation');
+Route::get('/myconsultations', 'PatientController@viewConsultation')->name('view-consultation');
+Route::post('/delete/{id}', 'PatientController@cancel')->name('delete-consultation');
+Route::post('/edit/{id}', 'PatientController@edit')->name('edit-consultation');
 
 Route::get('/home', 'HomeController@index')->name('home');

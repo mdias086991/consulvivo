@@ -5,8 +5,8 @@
 
 @section('content-dash')
 
-<div class="container mt-5" style="background: rgba(86, 97, 248, 0.69); padding: 5%;border-radius: 3px;">
-
+<div class="container mt-5" style="background: rgba(86, 97, 248, 0.69); padding: 3%;border-radius: 3px;">
+    <h4 style="color: white">Preencha o formulario para fazer a reserva da consulta</h4>
     <form class="row g-3" action="{{route('store-consultation')}}" method="POST">
       @csrf
       <div class="col-md-6" style="visibility: hidden">
